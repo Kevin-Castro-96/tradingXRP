@@ -4,3 +4,5 @@ node_modules/
 # Build (si luego usás dist)
 dist/
 build/
+.vercel
+.env*.local
