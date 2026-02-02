@@ -1,0 +1,6 @@
+.env
+# Node
+node_modules/
+# Build (si luego usás dist)
+dist/
+build/
