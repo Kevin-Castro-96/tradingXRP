@@ -26,13 +26,13 @@ Solo si se cumplen ambas condiciones se considera buen momento de compra.
 
 Clonar repositorio:
 
-git clone https://github.com/TU_USUARIO/TU_REPO.git
-cd TU_REPO
+- git clone https://github.com/TU_USUARIO/TU_REPO.git
+- cd TU_REPO
 
 ## variables de entorno
-EMAIL_USER=tu_mail@gmail.com
-EMAIL_PASS=app_password_gmail
-EMAIL_TO=destinatario@gmail.com
+- EMAIL_USER=tu_mail@gmail.com
+- EMAIL_PASS=app_password_gmail
+- EMAIL_TO=destinatario@gmail.com
 
 ## autor
 Kevin Castro
