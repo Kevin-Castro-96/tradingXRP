@@ -57,7 +57,7 @@ app.get("/cron", async (req, res) => {
 
     await transporter.sendMail({
       from: `"XRP Bot" <${process.env.EMAIL_USER}>`,
-      to: "kevincastro920@gmail.com",
+      to: process.env.EMAIL_TO,
       subject: "Análisis diario XRP",
       text: message,
     });
