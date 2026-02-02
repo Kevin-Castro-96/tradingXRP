@@ -18,7 +18,7 @@ function rangesOverlap(a, b) {
 
 export default async function handler(req, res) {
   try {
-    const url = `https://data.binance.com/api/v3/klines?symbol=${SYMBOL}&interval=${INTERVAL}&limit=3`;
+    const url = `https://api.binance.us/api/v3/klines?symbol=${SYMBOL}&interval=${INTERVAL}&limit=3`;
     const { data } = await axios.get(url);
 
     const candles = data.map((c) => ({
