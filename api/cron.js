@@ -18,15 +18,15 @@ function rangesOverlap(a, b) {
 
 export default async function handler(req, res) {
   try {
-    const url = `https://api.binance.com/api/v3/klines?symbol=${SYMBOL}&interval=${INTERVAL}&limit=3`;
+    const url = `https://data.binance.com/api/v3/klines?symbol=${SYMBOL}&interval=${INTERVAL}&limit=3`;
     const { data } = await axios.get(url);
 
-    const candles = data.map(c => ({
+    const candles = data.map((c) => ({
       open: parseFloat(c[1]),
       close: parseFloat(c[4]),
     }));
 
-    const ranges = candles.map(c => ({
+    const ranges = candles.map((c) => ({
       min: Math.min(c.open, c.close),
       max: Math.max(c.open, c.close),
     }));
@@ -69,7 +69,10 @@ Tendencia bajista: ${bearish}`;
       candles,
     });
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: "Error ejecutando cron" });
+    console.error("ERROR CRON:", error.message);
+    return res.status(500).json({
+      error: error.message,
+      stack: error.stack,
+    });
   }
 }
