@@ -19,8 +19,19 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-function rangesOverlap(a, b) {
-  return Math.max(a.min, b.min) <= Math.min(a.max, b.max);
+function rangesOverlap(a, b, tolerancePercent = 10) {
+  const sizeA = a.max - a.min;
+  const sizeB = b.max - b.min;
+
+  const toleranceA = sizeA * (tolerancePercent / 100);
+  const toleranceB = sizeB * (tolerancePercent / 100);
+
+  const minA = a.min - toleranceA;
+  const maxA = a.max + toleranceA;
+  const minB = b.min - toleranceB;
+  const maxB = b.max + toleranceB;
+
+  return Math.max(minA, minB) <= Math.min(maxA, maxB);
 }
 
 app.get("/cron", async (req, res) => {
@@ -39,9 +50,9 @@ app.get("/cron", async (req, res) => {
     }));
 
     const noOverlap =
-      !rangesOverlap(ranges[0], ranges[1]) &&
-      !rangesOverlap(ranges[1], ranges[2]) &&
-      !rangesOverlap(ranges[0], ranges[2]);
+      !rangesOverlap(ranges[0], ranges[1], 10) &&
+      !rangesOverlap(ranges[1], ranges[2], 10) &&
+      !rangesOverlap(ranges[0], ranges[2], 10);
 
     const bearish =
       candles[0].close > candles[1].close &&
